@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Harness FX-Crypto Radar - 실시간 외환 &amp; 코인 대시보드</title>
+    <link>https://fx-radar.vercel.app/</link>
+    <description>글로벌 법정화폐 환율과 주요 암호화폐 실시간 시세를 교차 분석하고 다중 통화 믹서 계산을 제공하는 핀테크 다크모드 대시보드입니다. 자산 변동성 Recharts 분석 차트를 활용해보세요.</description>
+    <language>ko</language>
+    <lastBuildDate>Wed, 03 Jun 2026 16:58:00 GMT</lastBuildDate>
+    <category>금융, 외환환율, 암호화폐, 비트코인, 대시보드, 핀테크</category>
+    <atom:link href="https://fx-radar.vercel.app/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>실시간 외환 &amp; 코인 대시보드 (FX-Crypto Radar) — 대시보드 바로가기</title>
+      <link>https://fx-radar.vercel.app/</link>
+      <description><![CDATA[글로벌 환율 및 코인 시세를 한눈에 파악하고 실시간 가격 Flicker 감지 기능이 있는 네온 금융 대시보드를 탐색합니다.]]></description>
+      <pubDate>Wed, 03 Jun 2026 16:58:00 GMT</pubDate>
+      <guid isPermaLink="true">https://fx-radar.vercel.app/</guid>
+    </item>
+    <item>
+      <title>🧮 다중 통화 믹서 (Crypto + Fiat Mixer) — 교차 계산기 안내</title>
+      <link>https://fx-radar.vercel.app/</link>
+      <description><![CDATA[법정화폐(KRW, USD, EUR, JPY)와 암호화폐(BTC, ETH, SOL, XRP) 간 실시간 시세를 상호 결합하여 연산하는 교차 계산기 활용법입니다.]]></description>
+      <pubDate>Wed, 03 Jun 2026 16:58:00 GMT</pubDate>
+      <guid isPermaLink="false">https://fx-radar.vercel.app/#mixer</guid>
+    </item>
+    <item>
+      <title>📊 자산 변동성 레이더 분석 — Recharts 트렌드 차트</title>
+      <link>https://fx-radar.vercel.app/</link>
+      <description><![CDATA[5회 이상의 실시간 시세 변동 히스토리를 누적 분석하여 제공하는 변동성 레이더 차트 및 미니 트렌드 분석 기능의 가이드입니다.]]></description>
+      <pubDate>Wed, 03 Jun 2026 16:58:00 GMT</pubDate>
+      <guid isPermaLink="false">https://fx-radar.vercel.app/#trends</guid>
+    </item>
+  </channel>
+</rss>
