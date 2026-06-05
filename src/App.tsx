@@ -531,7 +531,11 @@ export default function App() {
         <AdsensePassSection />
 
         {/* Footer */}
-        <footer className="text-center mt-12 text-slate-600 text-[10px] uppercase tracking-widest">
+        <footer className="text-center mt-12 pb-8 border-t border-white/5 pt-8 text-slate-500 text-[10px] uppercase tracking-widest">
+          <div className="flex justify-center gap-6 mb-4 text-[11px] font-bold text-slate-400">
+            <a href="/privacy.html" className="hover:text-white transition-colors">Privacy Policy</a>
+            <a href="#terms" className="hover:text-white transition-colors">Terms of Service</a>
+          </div>
           &copy; 2026 Harness Systems. All Rights Reserved.
         </footer>
 
