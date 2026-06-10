@@ -30,6 +30,34 @@ export const SurveyEngine = ({ survey, modeLimit, onComplete }: SurveyEngineProp
     setQuestionStartTime(Date.now());
   }, [currentIdx]);
 
+  // 키보드 단축키: 숫자 1-5 = 답변, 스페이스바 = 뒤로가기
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.code === 'Space') {
+        e.preventDefault();
+        if (currentIdx > 0) { setDirection(-1); setCurrentIdx(prev => prev - 1); }
+        return;
+      }
+      const num = parseInt(e.key);
+      if (isNaN(num) || num < 1 || num > 5) return;
+      const q = activeQuestions[currentIdx];
+      if (!q) return;
+      const latencyMs = Date.now() - questionStartTime;
+      playPopSound();
+      const val = q.t === 'V' ? (num === 1 ? 1 : 5) : num;
+      if (q.t === 'V' && num > 2) return;
+      const newAnswers = { ...answers, [currentIdx]: { value: val, latencyMs } };
+      setAnswers(newAnswers);
+      setTimeout(() => {
+        if (currentIdx < activeQuestions.length - 1) {
+          setDirection(1); setCurrentIdx(currentIdx + 1);
+        } else { onComplete(newAnswers); }
+      }, 250);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [currentIdx, activeQuestions, answers, questionStartTime, onComplete]);
+
   if (activeQuestions.length === 0 || !activeQuestions[0]) {
     return <div className="text-center py-24 text-slate-400">Loading...</div>;
   }
