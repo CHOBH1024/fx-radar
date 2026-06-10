@@ -302,7 +302,7 @@ export const SurveyResults = ({ survey, answers, onRestart, onHome }: SurveyResu
           initial={{ opacity: 0, scale: 0.9, y: 30 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 0.8, type: 'spring', bounce: 0.4 }}
-          className="w-full relative overflow-hidden rounded-[3rem] border-[1px] border-white/20 flex flex-col items-center justify-between p-8"
+          className="w-full relative overflow-hidden rounded-[3rem] border-[1px] border-white/20 flex flex-col items-center justify-start gap-3 p-8"
           style={{
             aspectRatio: cardFormat === '9:16' ? '9/16' : '1/1',
             background: cardBg,
@@ -340,38 +340,35 @@ export const SurveyResults = ({ survey, answers, onRestart, onHome }: SurveyResu
             </div>
           </div>
 
-          <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.4, duration: 0.8 }} className="relative z-10 w-full my-4">
-            <div className="w-full rounded-[2rem] bg-black/20 backdrop-blur-xl border border-white/10 p-5 shadow-[inset_0_0_40px_rgba(0,0,0,0.3)]">
-              <p className="text-white/50 text-[11px] font-black uppercase tracking-[0.2em] mb-4">📈 9가지 투자 편향 분석</p>
-              <div className="space-y-2.5">
+          <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.4, duration: 0.8 }} className="relative z-10 w-full">
+            <div className="w-full rounded-[1.5rem] bg-black/20 border border-white/10 px-4 py-3">
+              <p className="text-white/40 text-[10px] font-black uppercase tracking-[0.15em] mb-2">📈 {survey.categories.length}개 편향 분석</p>
+              <div className="space-y-1.5">
                 {[...radarData].sort((a, b) => b.A - a.A).map((item, idx) => (
-                  <div key={idx} className="flex items-center gap-3">
-                    <span className={`text-[11px] font-black shrink-0 w-24 text-right leading-tight ${idx === 0 ? 'text-cyan-400' : 'text-white/50'}`}>{item.subject}</span>
-                    <div className="flex-1 h-2 bg-white/10 rounded-full overflow-hidden">
-                      <div className={`h-full rounded-full ${idx === 0 ? 'bg-cyan-400' : idx < 3 ? 'bg-blue-400/70' : 'bg-white/25'}`} style={{ width: `${item.A}%` }} />
+                  <div key={idx} className="flex items-center gap-2">
+                    <span className="text-[10px] font-black shrink-0 w-16 text-right leading-tight" style={{ color: idx === 0 ? cardTheme.from : 'rgba(255,255,255,0.38)' }}>{item.subject}</span>
+                    <div className="flex-1 h-1.5 bg-white/10 rounded-full overflow-hidden">
+                      <div className="h-full rounded-full" style={{ width: `${item.A}%`, background: idx === 0 ? cardTheme.from : idx < 3 ? `${cardTheme.to}55` : 'rgba(255,255,255,0.18)' }} />
                     </div>
-                    <span className={`text-[11px] font-black w-7 text-right ${idx === 0 ? 'text-cyan-400' : 'text-white/40'}`}>{item.A}</span>
-                    {idx === 0 && <span className="text-[9px] font-black text-cyan-400/80 bg-cyan-400/10 border border-cyan-400/20 px-1.5 py-0.5 rounded-full shrink-0">지배 편향</span>}
+                    <span className="text-[10px] font-black w-6 text-right" style={{ color: idx === 0 ? cardTheme.from : 'rgba(255,255,255,0.28)' }}>{item.A}</span>
+                    {idx === 0 && <span className="text-[8px] font-black px-1 py-0.5 rounded-full shrink-0" style={{ color: cardTheme.from, background: `${cardTheme.from}20`, border: `1px solid ${cardTheme.from}30` }}>▲</span>}
                   </div>
                 ))}
               </div>
             </div>
           </motion.div>
 
-          <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.6, duration: 0.6 }} className="relative z-10 w-full flex flex-col items-center">
-            <div className={`w-full rounded-3xl p-5 mb-4 border ${cardDark ? 'bg-black/40 border-rose-500/20' : 'bg-rose-50/60 border-rose-200'} backdrop-blur-md`}>
-              <p className="text-rose-400 text-[10px] font-black mb-2 uppercase tracking-wider">🔥 팩트 폭행</p>
-              <p className={`text-xs font-bold leading-relaxed word-keep ${cardDark ? 'text-white/90' : 'text-slate-800'}`}>
-                {resultData.strengths[0]}
-              </p>
+          <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.6, duration: 0.6 }} className="relative z-10 w-full mt-auto">
+            <div className={`w-full rounded-2xl px-4 py-3 border ${cardDark ? 'bg-black/30 border-white/10' : 'bg-slate-50/60 border-slate-200'}`}>
+              <p className="text-[9px] font-black mb-1 uppercase tracking-wider" style={{ color: cardTheme.from }}>✦ {resultData.persona}</p>
+              <p className={`text-[10px] font-bold leading-relaxed word-keep ${cardDark ? 'text-white/80' : 'text-slate-700'}`}>{resultData.headline}</p>
             </div>
-
             {showQR && (
-              <div className="bg-white p-3 rounded-2xl shadow-xl mb-4">
-                <QRCodeSVG value={resultUrl} size={64} bgColor="#ffffff" fgColor="#0f172a" level="M" />
+              <div className="bg-white p-2 rounded-xl shadow-xl mt-2 mx-auto w-fit">
+                <QRCodeSVG value={resultUrl} size={48} bgColor="#ffffff" fgColor="#0f172a" level="M" />
               </div>
             )}
-            <p className={`text-[9px] font-black uppercase tracking-[0.4em] ${cardDark ? 'text-white/30' : 'text-black/30'}`}>MZ RADAR</p>
+            <p className={`text-[8px] font-black uppercase tracking-[0.4em] text-center mt-2 ${cardDark ? 'text-white/20' : 'text-black/20'}`}>FX RADAR</p>
           </motion.div>
         </motion.div>
 
