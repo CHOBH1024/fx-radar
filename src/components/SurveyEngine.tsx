@@ -224,7 +224,7 @@ export const SurveyEngine = ({ survey, modeLimit, onComplete }: SurveyEngineProp
                   transition={{ delay: 0.2 }}
                   className="w-full mt-auto"
                 >
-                  <div className="flex justify-between text-[10px] font-black text-white/40 px-2 uppercase tracking-[0.2em] mb-4">
+                  <div className="flex justify-between text-sm font-black text-white/60 px-2 mb-4">
                     <span>전혀 아니다</span>
                     <span>매우 그렇다</span>
                   </div>

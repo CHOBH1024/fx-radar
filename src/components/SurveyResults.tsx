@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { SurveyConfig, AnswerData } from '../types';
-import { RadarChart3D } from './RadarChart3D';
+
 import { SnsExportButton } from './SnsExportButton';
 import { ArrowLeft, Link as LinkIcon, ChevronLeft, ChevronRight, RotateCcw, Settings, X, Share2, Sparkles } from 'lucide-react';
 import { themeMap } from '../theme';
@@ -340,9 +340,21 @@ export const SurveyResults = ({ survey, answers, onRestart, onHome }: SurveyResu
             </div>
           </div>
 
-          <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.4, duration: 0.8 }} className="relative z-10 w-full flex-1 flex items-center justify-center my-4">
-            <div className="w-full aspect-square rounded-[3rem] flex items-center justify-center bg-black/20 backdrop-blur-xl border border-white/10 p-2 shadow-[inset_0_0_40px_rgba(0,0,0,0.3)]">
-              <RadarChart3D data={radarData} name={survey.name} strokeColor={cardDark ? '#ffffff' : '#1e293b'} />
+          <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.4, duration: 0.8 }} className="relative z-10 w-full my-4">
+            <div className="w-full rounded-[2rem] bg-black/20 backdrop-blur-xl border border-white/10 p-5 shadow-[inset_0_0_40px_rgba(0,0,0,0.3)]">
+              <p className="text-white/50 text-[11px] font-black uppercase tracking-[0.2em] mb-4">📈 9가지 투자 편향 분석</p>
+              <div className="space-y-2.5">
+                {[...radarData].sort((a, b) => b.A - a.A).map((item, idx) => (
+                  <div key={idx} className="flex items-center gap-3">
+                    <span className={`text-[11px] font-black shrink-0 w-24 text-right leading-tight ${idx === 0 ? 'text-cyan-400' : 'text-white/50'}`}>{item.subject}</span>
+                    <div className="flex-1 h-2 bg-white/10 rounded-full overflow-hidden">
+                      <div className={`h-full rounded-full ${idx === 0 ? 'bg-cyan-400' : idx < 3 ? 'bg-blue-400/70' : 'bg-white/25'}`} style={{ width: `${item.A}%` }} />
+                    </div>
+                    <span className={`text-[11px] font-black w-7 text-right ${idx === 0 ? 'text-cyan-400' : 'text-white/40'}`}>{item.A}</span>
+                    {idx === 0 && <span className="text-[9px] font-black text-cyan-400/80 bg-cyan-400/10 border border-cyan-400/20 px-1.5 py-0.5 rounded-full shrink-0">지배 편향</span>}
+                  </div>
+                ))}
+              </div>
             </div>
           </motion.div>
 
