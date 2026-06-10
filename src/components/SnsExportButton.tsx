@@ -34,7 +34,7 @@ export const SnsExportButton = ({ surveyName, surveyColor, resultData, compact =
       canvas.toBlob(async (blob) => {
         if (!blob) throw new Error('Blob generation failed');
         
-        const file = new File([blob], `MZRadar_${surveyName}.png`, { type: 'image/png' });
+        const file = new File([blob], `FXRadar_${surveyName}.png`, { type: 'image/png' });
         
         if (navigator.canShare && navigator.canShare({ files: [file] })) {
           try {
