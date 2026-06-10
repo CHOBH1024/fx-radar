@@ -478,6 +478,50 @@ export const SurveyResults = ({ survey, answers, onRestart, onHome }: SurveyResu
           </section>
         )}
 
+        {/* ── 핵심 강점 전체 ── */}
+        {resultData.strengths && resultData.strengths.length > 0 && (
+          <section className="rounded-[2.5rem] border border-white/10 p-6 bg-white/5 backdrop-blur-3xl shadow-xl">
+            <h2 className="text-white font-black text-sm mb-5 flex items-center gap-2">
+              💪 이 편향 유형의 강점
+            </h2>
+            <div className="space-y-3">
+              {resultData.strengths.map((s, idx) => (
+                <div key={idx} className="flex gap-3 items-start bg-emerald-500/10 border border-emerald-500/20 rounded-3xl p-4">
+                  <span className="w-5 h-5 rounded-full bg-emerald-500/20 flex items-center justify-center text-[10px] font-black text-emerald-300 shrink-0 mt-0.5">{idx + 1}</span>
+                  <p className="text-white/90 font-bold text-sm leading-relaxed word-keep">{s}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* ── 주의해야 할 패턴 ── */}
+        {resultData.weaknesses && resultData.weaknesses.length > 0 && (
+          <section className="rounded-[2.5rem] border border-white/10 p-6 bg-white/5 backdrop-blur-3xl shadow-xl">
+            <h2 className="text-white font-black text-sm mb-5 flex items-center gap-2">
+              ⚠️ 이 편향이 만드는 손실 패턴
+            </h2>
+            <div className="space-y-3">
+              {resultData.weaknesses.map((w, idx) => (
+                <div key={idx} className="flex gap-3 items-start bg-red-500/10 border border-red-500/20 rounded-3xl p-4">
+                  <span className="w-5 h-5 rounded-full bg-red-500/20 flex items-center justify-center text-[10px] font-black text-red-300 shrink-0 mt-0.5">!</span>
+                  <p className="text-white/90 font-bold text-sm leading-relaxed word-keep">{w}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* ── 전문가 처방 ── */}
+        {resultData.advice && (
+          <section className="rounded-[2.5rem] border border-amber-500/20 p-6 bg-amber-500/5 backdrop-blur-3xl shadow-xl">
+            <h2 className="text-white font-black text-sm mb-4 flex items-center gap-2">
+              🎯 편향 교정 처방
+            </h2>
+            <p className="text-white/90 font-bold text-sm leading-relaxed word-keep">{resultData.advice}</p>
+          </section>
+        )}
+
         {/* ── Celeb Match ── */}
         <section className="rounded-[2.5rem] border border-white/10 p-6 bg-white/5 backdrop-blur-3xl shadow-xl">
           <h2 className="text-white font-black text-sm mb-5">⭐ 당신이 셀럽이라면?</h2>
