@@ -66,15 +66,15 @@ export function calculateScores(survey: SurveyConfig, answers: Record<number, An
   reliabilityScore = Math.max(0, Math.min(100, reliabilityScore));
 
   const averageScore = answeredCount > 0 ? totalScore / answeredCount : 0;
-  const categoryScores = [1, 2, 3, 4, 5, 6].map(cat => 
-    categoryCounts[cat] > 0 ? categoryTotals[cat] / categoryCounts[cat] : 0
-  );
 
-  // 11. Advanced Weighting: Example Synergy (e.g., if Cat 1 and Cat 2 are both high, boost Cat 1 slightly)
-  const synergyBonuses = [];
-  if (categoryScores[0] > 70 && categoryScores[1] > 70) {
-    synergyBonuses.push({ category: 1, bonus: 5 });
-  }
+  // Dynamic category count — supports any number of categories (9 for fx-radar)
+  const numCategories = survey.categories.length || Math.max(...Object.keys(categoryTotals).map(Number), 0);
+  const categoryScores = Array.from({ length: numCategories }, (_, i) => {
+    const cat = i + 1;
+    return categoryCounts[cat] > 0 ? categoryTotals[cat] / categoryCounts[cat] : 0;
+  });
+
+  const synergyBonuses: { category: number, bonus: number }[] = [];
 
   return {
     averageScore,

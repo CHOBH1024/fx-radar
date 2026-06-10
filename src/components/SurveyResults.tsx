@@ -445,6 +445,27 @@ export const SurveyResults = ({ survey, answers, onRestart, onHome }: SurveyResu
           </section>
         )}
 
+        {/* ── 편향 교정 처방전 (FX 전용) ── */}
+        {(resultData as any).biasCorrection && (
+          <section className="rounded-[2.5rem] border border-cyan-500/20 p-6 bg-cyan-500/5 backdrop-blur-3xl shadow-xl">
+            <h2 className="text-white font-black text-sm mb-5 flex items-center gap-2">
+              💊 편향 교정 3단계 처방전
+            </h2>
+            <div className="space-y-3">
+              {[
+                { label: '단기 (1~4주)', value: (resultData as any).biasCorrection.short, color: 'text-green-300', bg: 'bg-green-500/10 border-green-500/20' },
+                { label: '중기 (1~3개월)', value: (resultData as any).biasCorrection.mid, color: 'text-yellow-300', bg: 'bg-yellow-500/10 border-yellow-500/20' },
+                { label: '장기 (6개월+)', value: (resultData as any).biasCorrection.long, color: 'text-cyan-300', bg: 'bg-cyan-500/10 border-cyan-500/20' },
+              ].map((step, idx) => (
+                <div key={idx} className={`flex gap-4 items-start border rounded-3xl p-4 ${step.bg}`}>
+                  <span className={`text-[10px] font-black uppercase tracking-wider shrink-0 mt-0.5 ${step.color}`}>{step.label}</span>
+                  <p className="text-white/90 font-bold text-sm leading-relaxed word-keep">{step.value}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
         {/* ── Celeb Match ── */}
         <section className="rounded-[2.5rem] border border-white/10 p-6 bg-white/5 backdrop-blur-3xl shadow-xl">
           <h2 className="text-white font-black text-sm mb-5">⭐ 당신이 셀럽이라면?</h2>
